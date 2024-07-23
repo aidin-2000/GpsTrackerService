@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.35027.167
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GpsTrackerService", "GpsTrackerService\GpsTrackerService.csproj", "{178FD58F-6A7B-48EC-9177-B87D63EF8158}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{178FD58F-6A7B-48EC-9177-B87D63EF8158}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{178FD58F-6A7B-48EC-9177-B87D63EF8158}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{178FD58F-6A7B-48EC-9177-B87D63EF8158}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{178FD58F-6A7B-48EC-9177-B87D63EF8158}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {63C64D36-C8A3-446D-84A4-42F679561BED}
+	EndGlobalSection
+EndGlobal

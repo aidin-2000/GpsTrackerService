@@ -1,0 +1,71 @@
+﻿@{
+    ViewData["Title"] = "GPS Tracker";
+}
+
+<h2>GPS Tracker</h2>
+
+<label for="nameInput">Enter Name:</label>
+<input type="text" id="nameInput" />
+<button id="confirmNameButton">Confirm Name</button>
+
+<div id="map" style="height: 500px; width: 100%;"></div>
+
+@section Scripts {
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+
+    <script>
+        let confirmedName = '';
+        let map;
+        let marker;
+
+        document.getElementById('confirmNameButton').addEventListener('click', function () {
+            confirmedName = document.getElementById('nameInput').value;
+            if (confirmedName) {
+                document.getElementById('confirmNameButton').disabled = true;
+                alert('Name confirmed: ' + confirmedName);
+                login();
+            } else {
+                alert('Please enter a name.');
+            }
+        });
+
+        function login() {
+            fetch('/Tracker/Login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ Name: confirmedName })
+            }).then(response => response.text())
+                .then(data => {
+                    console.log(data);
+                    startTracking();
+                });
+        }
+
+        function startTracking() {
+            setInterval(() => {
+                fetch('/Tracker/GetTracking', {
+                    method: 'POST'
+                }).then(response => response.json())
+                    .then(data => {
+                        if (!map) {
+                            map = L.map('map').setView([data.latitude, data.longitude], 13);
+                            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                            }).addTo(map);
+                        }
+
+                        if (marker) {
+                            marker.setLatLng([data.latitude, data.longitude]);
+                        } else {
+                            marker = L.marker([data.latitude, data.longitude]).addTo(map)
+                                .bindPopup('Tracker Location')
+                                .openPopup();
+                        }
+                    });
+            }, 5000); // Отправка запроса каждые 5 секунд
+        }
+    </script>
+}
